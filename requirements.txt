@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------------
+# drone_env - Python dependencies for the PC side of the vision system.
+#
+# Create the environment (see README.md > Installation):
+#   conda create -n drone_env python=3.11 -y
+#   conda activate drone_env
+#   pip install -r requirements.txt
+#
+# The PC has no NVIDIA GPU, so PyTorch is pulled from the CPU-only index
+# (much smaller download, no CUDA libraries). GPU training happens on Colab.
+# ---------------------------------------------------------------------------
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Core numerics / image handling
+numpy>=1.26,<3
+opencv-python>=4.9
+Pillow>=10.0
+
+# Communication with the ESP32-CAM (HTTP MJPEG stream + control endpoints)
+requests>=2.31
+
+# Configuration files
+PyYAML>=6.0
+
+# Deep learning (CPU build) + YOLO (detection and classification)
+torch>=2.3
+torchvision>=0.18
+ultralytics>=8.3.0

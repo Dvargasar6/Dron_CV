@@ -1,0 +1,29 @@
+# ---------------------------------------------------------------------------
+# Central configuration for the PC side of the drone vision system.
+# Every script reads this file; CLI flags override individual values.
+# ---------------------------------------------------------------------------
+
+esp32:
+  # IP printed by the ESP32-CAM on the serial monitor at boot.
+  # In AP mode (ESP32 creates its own WiFi) the IP is always 192.168.4.1
+  host: 192.168.1.50
+  control_port: 80        # /status, /capture, /control
+  stream_port: 81         # /stream (MJPEG)
+  timeout_s: 5.0          # HTTP connect/read timeout
+  reconnect_delay_s: 1.0  # wait before reconnecting after a dropped stream
+
+camera:
+  # Initial settings pushed to the ESP32 when the GUI connects.
+  # framesize names: QQVGA(160x120) QVGA(320x240) CIF(400x296) VGA(640x480)
+  #                  SVGA(800x600) XGA(1024x768) HD(1280x720) SXGA UXGA
+  framesize: VGA
+  quality: 12             # JPEG quality 4..63 (lower = better image, bigger frames)
+
+gui:
+  refresh_ms: 15          # how often the GUI polls for a new frame
+  max_display_width: 960  # frames are scaled down to fit this width
+
+dataset:
+  # Where snapshots / recorded frames are saved (used to build the datasets)
+  raw_dir: data/raw
+  record_every_n: 5       # in "record" mode keep 1 of every N frames
